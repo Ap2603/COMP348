@@ -33,10 +33,11 @@ int main(void)
 {   //testing the aasel method
 	atom example= 't';
 	element e1 = aasel(example);
+	
 	printf("the type atom is:%d\n", ATOM);
 	printf("the type list is:%d\n", LIST);
+	printf("Testing aasel with atom t\n");
 	printf("the type for elemenet1 is:%d\n", e1.type);
-	printf("the char for t is:%c\n", 't');
 	printf("the atom for the element1 is:%c\n", e1.a);
 	//creating tets data for lasel
 	list newList = (struct list*)malloc(sizeof(list));
@@ -48,20 +49,23 @@ int main(void)
 		newList->el = e1;
 		//testing lasel method
 		element e2 = lasel(newList);
-		printf("the type for elemenet2 is:%d\n", e2.type);
-		printf("the type for the element2 in list is:%d\n", e2.l->el.type);
-		printf("the atom for the element2 in list is:%c\n", e2.l->el.a); 
+		printf("Testing lasel with list containg atom t\n");
+		printf("the type for lasel is:%d\n", e2.type);
+		printf("the type for lasel in list is:%d\n", e2.l->el.type);
+		printf("the atom for lasel in list is:%c\n", e2.l->el.a); 
 		//testing car mehtod will return null with invalid parameters
 		element e3 = car(e1);
-		printf("the type for elemenet3 is:%d\n", e3.type);
+		printf("testing car while given an atom value\n");
+		printf("the type for head is:%d\n", e3.type);
 		if (e3.l == NULL) {
 			printf("this is null\n");
 		}
 		//testing car method
 		element e4 = car(e2);
-		printf("the type for the element4 in list is:%d\n", e4.type);
-		printf("the atom for the element4 in list is:%c\n", e4.a);
+		printf("the type for the head in list is:%d\n", e4.type);
+		printf("the atom for the head in list is:%c\n", e4.a);
 		e1.a = 'r';
+		printf("Testing the const list:\n");
 		//testing cons method
 		list conList = cons(e1, newList);
 		printf("the type for the conList in list is:%d\n", conList->el.type);
@@ -85,9 +89,11 @@ int main(void)
 		element fullList= { .type = LIST, .l = newListPart1 };
 		//testing cdr method
 		list tail=cdr(fullList);
+		printf("Testing tail:");
 		printf("the type for the tail in list is:%d\n", tail->el.type);
 		printf("the atom for the tail in list is:%c\n", tail->el.a);
 		//testing cdr method will return null with invalid parameters
+		printf("testing crd with invalid parameters:\n");
 		list shouldBeNull=cdr(e1);
 		if (shouldBeNull == NULL) {
 			printf("the type for cdr not list is:this is null\n");
@@ -105,6 +111,7 @@ int main(void)
 		element eNUllChecker2 = { .type = LIST, .l = listWith2 };
 		//testing cdr method will return null with invalid parameters
 		shouldBeNull=cdr(eNUllChecker0);
+		printf("testing crd with invalid parameters:\n");
 		if (shouldBeNull == NULL) {
 			printf("the type for cdr 1 list is:this is null\n");
 		}
@@ -114,9 +121,11 @@ int main(void)
 		}
 		//testing cddr
 		list tailOfTail= cddr(fullList);
+		printf("Testing cddr:\n");
 		printf("the type for the tailOfTail in list is:%d\n", tailOfTail->el.type);
 		printf("the atom for the tailOfTail in list is:%c\n", tailOfTail->el.a);
 		//testing cddr method will return null with invalid parameters
+		printf("Testing cddr with invalid parametrs:\n");
 		shouldBeNull= cddr(e1);
 		if (shouldBeNull == NULL) {
 			printf("the type for ccdr not list is:this is null\n");
@@ -166,6 +175,7 @@ int main(void)
 		newListPart1COMBINE2->next = newListPart2COMBINE2;
 		//testing apending, printing andd freeing
 		list total=append(newListPart1COMBINE2, newListPart1COMBINE1);
+		printf("testing combing list\n");
 		printf("the type for the PART1 in list is:%d\n", total->el.type);
 		printf("the atom for the PART1 in list is:%c\n", total->el.a);
 		printf("the type for the PART2 in list is:%d\n", total->next->el.type);
@@ -180,7 +190,9 @@ int main(void)
 		printf("the atom for the PART6 in list is:%c\n", total->next->next->next->next->next->el.a);
 
 		element eFullList = {.type=LIST, .l= total };
+		printf("testing print list\n");
 		print(eFullList);
+		printf("testing free list\n");
 		lfreer(total);
 		//creating test date for appending, printing a freeing with sub lists
 		list printListPart6 = (list)malloc(sizeof(struct _listnode));
@@ -266,7 +278,7 @@ int main(void)
 		printListPart1->next->next->next = NULL;
 		//tests is you can append two list who contain elements that poitn to other lists
 		list combined2=append(printListPart1 , printListPart4);
-		
+		printf("Testing append function with a list contaning sub list ");
 		printf("the type for the PART1 in list is:%d\n", combined2->el.type);
 		printf("the atom for the PART1 in list is:%c\n", combined2->el.a);
 		printf("the type for the PART2 in list is:%d\n", combined2->next->el.type);
@@ -280,7 +292,9 @@ int main(void)
 		printListPart1->next->next->next = printListPart4;
 		element eTest = { .type = LIST, .l = printListPart1 };
 		//test printing and freeing with lists contaiing sub lists
+		printf("Testing print function with a list contaning sub list ");
 		print(eTest);
+		printf("Testing free function with a list contaning sub list ");
 		lfreer(printListPart1);
 		
 	}
