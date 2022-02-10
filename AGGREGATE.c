@@ -109,7 +109,7 @@ int main(){
                 printf("The average value in Array3 is: %f\n" , result2);
             }
             if (i==4){
-                printf("The pseudo-average value in Array2 is: %f\n" , result);
+                printf("The psuedo-average value in Array2 is: %f\n" , result);
                 printf("The psuedo-average value in Array3 is: %f\n" , result2);
             }
             }
